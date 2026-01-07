@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Viewer</title>
+  <script src="assets/js/config.js"></script>
+  <style>
+    body { margin:0; font-family:Arial; background:#f4f4f4; }
+    iframe { width:100%; height:600px; border:none; }
+  </style>
+</head>
+<body>
+
+<iframe id="frame" style="display:none"></iframe>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+if (!user) {
+  alert("Login required");
+  location.href = "login.html";
+}
+
+const id = new URLSearchParams(location.search).get("id");
+
+fetch(API_URL + "?action=view&id=" + id)
+  .then(r => r.json())
+  .then(d => {
+    if (d.mode === "iframe") {
+      document.getElementById("frame").src = d.url;
+      document.getElementById("frame").style.display = "block";
+    } else if (d.mode === "redirect") {
+      window.location.href = d.url; // VIDEO
+    }
+  });
+
+// history
+fetch(API_URL, {
+  method: "POST",
+  body: JSON.stringify({
+    action: "history",
+    email: user.email,
+    item_id: id
+  })
+});
+</script>
+
+</body>
+</html>

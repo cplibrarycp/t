@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Profile – Thripudi Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- MAIN STYLE -->
+<link rel="stylesheet" href="assets/css/style.css">
+
+<style>
+.profile-container{
+  max-width:900px;
+  margin:40px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:16px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.profile-header{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.profile-photo{
+  text-align:center;
+}
+
+.profile-photo img{
+  width:140px;
+  height:140px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid #0f766e;
+}
+
+.profile-photo input{
+  margin-top:10px;
+}
+
+.profile-photo button{
+  margin-top:10px;
+  padding:8px 16px;
+  background:#0f766e;
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.profile-form{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+
+.profile-form label{
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:4px;
+  display:block;
+}
+
+.profile-form input,
+.profile-form textarea,
+.profile-form select{
+  width:100%;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.profile-form textarea{
+  resize:vertical;
+}
+
+.profile-actions{
+  margin-top:30px;
+  text-align:center;
+}
+
+.profile-actions button{
+  padding:12px 26px;
+  background:#006A4E;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.msg{
+  margin-top:10px;
+  font-size:14px;
+  color:green;
+}
+</style>
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<main class="page-content">
+
+<div class="profile-container">
+
+  <h2 style="margin-bottom:25px;color:#003300;">പ്രൊഫൈൽ സെറ്റിംഗ്</h2>
+
+  <div class="profile-header">
+
+    <!-- PHOTO -->
+    <div class="profile-photo">
+      <img id="profilePreview" src="assets/cover/default_user.jpg">
+      <input type="file" id="photoInput" accept="image/*">
+      <button onclick="uploadPhoto()">Upload Photo</button>
+      <div id="photoMsg" class="msg"></div>
+    </div>
+
+    <!-- FORM -->
+    <div style="flex:1;">
+      <div class="profile-form">
+
+        <div>
+          <label>പേര്</label>
+          <input id="name">
+        </div>
+
+        <div>
+          <label>പ്രായം</label>
+          <input id="age" type="number">
+        </div>
+
+        <div>
+          <label>ലിംഗം</label>
+          <select id="gender">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label>ജോലി</label>
+          <input id="job">
+        </div>
+
+        <div>
+          <label>മൊബൈൽ</label>
+          <input id="mobile">
+        </div>
+
+        <div>
+          <label>WhatsApp</label>
+          <input id="whatsapp">
+        </div>
+
+        <div style="grid-column:1/-1">
+          <label>വിലാസം</label>
+          <textarea id="address" rows="3"></textarea>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="profile-actions">
+    <button onclick="saveProfile()">Save Profile</button>
+    <div id="profileMsg" class="msg"></div>
+  </div>
+
+</div>
+
+</main>
+
+<div id="footer"></div>
+
+<!-- MAIN + PROFILE JS -->
+<script src="assets/js/main.js"></script>
+<script src="assets/js/profile.js"></script>
+
+</body>
+</html>

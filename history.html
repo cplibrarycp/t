@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My History</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/config.js"></script>
+
+  <style>
+    .msg {
+      padding: 20px;
+      font-size: 14px;
+      opacity: .7;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>My History</h1>
+  <div class="actions">
+    <button onclick="goHome()">Home</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<div class="container">
+  <div id="grid" class="grid"></div>
+  <div id="msg" class="msg"></div>
+</div>
+
+<script>
+/* ================= AUTH CHECK ================= */
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (!user || !user.email) {
+  alert("Login required");
+  location.href = "login.html";
+}
+
+/* ================= HELPERS ================= */
+function goHome() {
+  location.href = "index.html";
+}
+function logout() {
+  localStorage.clear();
+  location.href = "login.html";
+}
+
+/* ================= LOAD HISTORY ================= */
+const url =
+  API_URL +
+  "?action=historyList&email=" +
+  encodeURIComponent(user.email);
+
+console.log("History API:", url);
+
+fetch(url)
+  .then(r => r.text())              // 👈 IMPORTANT
+  .then(txt => {
+    console.log("Raw response:", txt);
+
+    let data;
+    try {
+      data = JSON.parse(txt);
+    } catch (e) {
+      document.getElementById("msg").innerText =
+        "API error: invalid JSON";
+      return;
+    }
+
+    if (!Array.isArray(data) || data.length === 0) {
+      document.getElementById("msg").innerText =
+        "No history found";
+      return;
+    }
+
+    let html = "";
+    data.forEach(i => {
+      html += `
+        <div class="card">
+          <h3>${i.title}</h3>
+          <div class="type">${i.type.toUpperCase()}</div>
+          <div class="type">${i.time}</div>
+          <button onclick="openItem('${i.id}')">Open again</button>
+        </div>
+      `;
+    });
+
+    document.getElementById("grid").innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText =
+      "Fetch error: " + err;
+    console.error(err);
+  });
+
+function openItem(id) {
+  location.href = "view.html?id=" + id;
+}
+</script>
+
+</body>
+</html>

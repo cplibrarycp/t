@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Aristotle Books – Thripudi Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page-content">
+
+<!-- PAGE TITLE + SEARCH -->
+<section class="page-hero">
+  <h2 id="pageTitle">Aristotle Books</h2>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search books..."
+      onkeyup="searchBooks()"
+    >
+  </div>
+</section>
+
+<section class="library-container">
+  <div class="book-grid" id="bookGrid"></div>
+</section>
+
+</main>
+
+<div id="footer"></div>
+
+<!-- 🔐 LOGIN MODAL -->
+<div class="login-modal" id="loginModal">
+  <div class="login-box">
+    <img src="assets/cover/logo.png" class="login-logo">
+    <h3>Thripudi Library</h3>
+    <p id="loginMessage">ലോഗിൻ ചെയ്യണം</p>
+
+    <div class="login-actions">
+      <button class="btn-login" onclick="goToLogin()">ലോഗിൻ ചെയ്യുക</button>
+      <button class="btn-cancel" onclick="closeLoginModal()">ഇപ്പോൾ വേണ്ട</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📚 PAGE BOOK DATA -->
+<script>
+window.pageBooks = [
+ { id: "11sGmuCoiyVGrdn4hEc2Ff6cF70qC0MnA", title: "Autobiography Twain", type: "audio", img: "assets/cover/21.JPG" },
+{ id: "15q7o8z7vSlrPTX7tQ7AG3Fq7UoL8bvsn", title: "Autobiography Twain", type: "audio", img: "assets/cover/31.JPG" },
+{ id: "1IkaIM_KfwlM_89Jq9XdxxCYdDiy2-hbT", title: "Autobiography Twain", type: "audio", img: "assets/cover/75.JPG" },
+{ id: "1dMntgfxkSwR1PXSDhEcB6YWtYtekaM5B", title: "Autobiography Twain", type: "audio", img: "assets/cover/65.JPG" },
+{ id: "12G4Qkf2yaQ4QfDUEpiwHB1-eiawVYeZH", title: "Autobiography Twain", type: "audio", img: "assets/cover/48.JPG" },
+{ id: "17wOex_gxU7V8O3DdbfaBT6gpAubaFMlc", title: "Autobiography Twain", type: "audio", img: "assets/cover/62.JPG" },
+{ id: "1iErIkdWDONWsuNUVId_fu60cVx1UOD5s", title: "Autobiography Twain", type: "audio", img: "assets/cover/54.JPG" },
+{ id: "1uhcBLf-Cor7OU6MyCnb-6O-x9Q5yzVZp", title: "Autobiography Twain", type: "audio", img: "assets/cover/47.JPG" },
+{ id: "1upNYxiC-yXFsSJzRZem83gJYGWEvNsQf", title: "Autobiography Twain", type: "audio", img: "assets/cover/63.JPG" },
+{ id: "1QunSpz4MkmwfTp1k_2SkSwKyLGVFUhGX", title: "Autobiography Twain", type: "audio", img: "assets/cover/17.JPG" },
+{ id: "1WloYR9cv99rbvCUvfxEyyKACXMMDvYeh", title: "Autobiography Twain", type: "audio", img: "assets/cover/48.JPG" },
+{ id: "1bumemjUWmmBE3THbGRx9b1v-MRgdbqZU", title: "Autobiography Twain", type: "audio", img: "assets/cover/12.JPG" },
+{ id: "1mIg2Y_SB7THzw1RdZLMjyaN2gB9xMdAn", title: "Autobiography Twain", type: "audio", img: "assets/cover/1.JPG" },
+{ id: "14yeeHrUnFe7KvYYqlEn5Gs_0vbfYyl4m", title: "Autobiography Twain", type: "audio", img: "assets/cover/86.JPG" },
+{ id: "1BVKnqJI1BuVByX2gYElxD7MInM6CglAc", title: "Autobiography Twain", type: "audio", img: "assets/cover/34.JPG" },
+{ id: "1GiTJgZx_lEA5dKyFgs9qZ-6PWMRAkhkO", title: "Autobiography Twain", type: "audio", img: "assets/cover/13.JPG" },
+{ id: "1V93brIdJm1X0xkeuaXtuoiHaqyjahHhR", title: "Autobiography Twain", type: "audio", img: "assets/cover/12.JPG" },
+{ id: "1_d5zkFr1ZZVabzdL2FCNi9qFUCgqAnoG", title: "Autobiography Twain", type: "audio", img: "assets/cover/42.JPG" },
+{ id: "1ccTt1hIgzHhepAqHrw68SoMizMOEm9h9", title: "Autobiography Twain", type: "audio", img: "assets/cover/85.JPG" },
+{ id: "1e0BjBKGrw0QpGSiBuygBd8Zgh4xJdagR", title: "Autobiography Twain", type: "audio", img: "assets/cover/77.JPG" },
+{ id: "1kU3u9kCWjVaqK9xoYai09Aqk9R9QTCco", title: "Autobiography Twain", type: "audio", img: "assets/cover/22.JPG" },
+{ id: "1seQRJBhcP-1mYj5snwdZ5Q1aB1tptgdv", title: "Autobiography Twain", type: "audio", img: "assets/cover/56.JPG" },
+{ id: "1xuS9_MlUqdaumZXxpm21Fx0qJ9agFipX", title: "Autobiography Twain", type: "audio", img: "assets/cover/14.JPG" },
+{ id: "1cJNcnjwyJ7afnVIDrjsYTgK_DoHy5ed0", title: "Autobiography Twain", type: "audio", img: "assets/cover/95.JPG" },
+{ id: "1pO8761hT6aZravj6g9F1Lzca4H2z1qDF", title: "Autobiography Twain", type: "audio", img: "assets/cover/92.JPG" },
+
+
+
+
+];
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

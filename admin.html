@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel – Thripudi Library</title>
+  <script src="assets/js/config.js"></script>
+
+  <style>
+    body { font-family: Arial; background:#f4f4f4; padding:20px; }
+    table { width:100%; border-collapse:collapse; background:#fff; }
+    th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+    th { background:#eee; }
+    input, select, button { padding:6px; margin:4px; }
+    .box { background:#fff; padding:15px; margin-bottom:20px; }
+    button { cursor:pointer; }
+  </style>
+</head>
+<body>
+
+<h1>Admin Panel</h1>
+
+<div class="box">
+  <h3>Add New Item</h3>
+
+  <input id="title" placeholder="Title">
+  <input id="category" placeholder="Category (Malayalam / English / Audio / Video)">
+  <input id="subcategory" placeholder="Subcategory">
+  
+  <select id="type">
+    <option value="pdf">PDF</option>
+    <option value="audio">Audio</option>
+    <option value="video">Video</option>
+  </select>
+
+  <input id="drive" placeholder="Google Drive File ID">
+  <br>
+  <button onclick="addItem()">Add</button>
+</div>
+
+<div class="box">
+  <h3>Library Items</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Subcategory</th>
+        <th>Type</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+</div>
+
+<script>
+// ADMIN CHECK
+const user = JSON.parse(localStorage.getItem("user"));
+if (!user || user.role !== "admin") {
+  alert("Admin only");
+  location.href = "login.html";
+}
+
+// LOAD ALL ITEMS
+fetch(API_URL + "?action=adminList")
+  .then(r => r.json())
+  .then(data => {
+    let html = "";
+    data.forEach(b => {
+      html += `
+        <tr>
+          <td>${b.id}</td>
+          <td>${b.title}</td>
+          <td>${b.category}</td>
+          <td>${b.subcategory}</td>
+          <td>${b.type}</td>
+          <td>
+            <button onclick="editItem(${b.id})">Edit</button>
+            <button onclick="deleteItem(${b.id})">Delete</button>
+          </td>
+        </tr>
+      `;
+    });
+    document.getElementById("rows").innerHTML = html;
+  });
+
+// ADD ITEM
+function addItem() {
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "add",
+      title: title.value,
+      category: category.value,
+      subcategory: subcategory.value,
+      type: type.value,
+      drive_id: drive.value
+    })
+  }).then(() => {
+    alert("Added");
+    location.reload();
+  });
+}
+
+// EDIT ITEM
+function editItem(id) {
+  const newTitle = prompt("New title?");
+  if (!newTitle) return;
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "edit",
+      id: id,
+      title: newTitle
+    })
+  }).then(() => {
+    alert("Updated");
+    location.reload();
+  });
+}
+
+// DELETE ITEM
+function deleteItem(id) {
+  if (!confirm("Delete this item?")) return;
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "delete",
+      id: id
+    })
+  }).then(() => {
+    alert("Deleted");
+    location.reload();
+  });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Aristotle Books – Thripudi Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page-content">
+
+<!-- PAGE TITLE + SEARCH -->
+<section class="page-hero">
+  <h2 id="pageTitle">Aristotle Books</h2>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search books..."
+      onkeyup="searchBooks()"
+    >
+  </div>
+</section>
+
+<section class="library-container">
+  <div class="book-grid" id="bookGrid"></div>
+</section>
+
+</main>
+
+<div id="footer"></div>
+
+<!-- 🔐 LOGIN MODAL -->
+<div class="login-modal" id="loginModal">
+  <div class="login-box">
+    <img src="assets/cover/logo.png" class="login-logo">
+    <h3>Thripudi Library</h3>
+    <p id="loginMessage">ലോഗിൻ ചെയ്യണം</p>
+
+    <div class="login-actions">
+      <button class="btn-login" onclick="goToLogin()">ലോഗിൻ ചെയ്യുക</button>
+      <button class="btn-cancel" onclick="closeLoginModal()">ഇപ്പോൾ വേണ്ട</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📚 PAGE BOOK DATA -->
+<script>
+window.pageBooks = [
+{ id: "1ziJSP1Zbq02uagrdym9Wkb5m_2YWXNhf", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1ziJSP1Zbq02uagrdym9Wkb5m_2YWXNhf=s400" },
+{ id: "1Ui9Gp6goW-i2Bmi8QV2mKLWnvh6jVCd0", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1Ui9Gp6goW-i2Bmi8QV2mKLWnvh6jVCd0=s400" },
+{ id: "1VEZ5EIBFPd8SHR7eyfSojSXPEFnH4owx", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1VEZ5EIBFPd8SHR7eyfSojSXPEFnH4owx=s400" },
+{ id: "1UMkZIomVc_Q0_C9L-IyNW-x5K6nsLj_W", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1UMkZIomVc_Q0_C9L-IyNW-x5K6nsLj_W=s400" },
+{ id: "1a7m1V7EG_HVezDM_gDvlU4b6RE4SK-hW", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1a7m1V7EG_HVezDM_gDvlU4b6RE4SK-hW=s400" },
+{ id: "1Gzyz0LUMQ5s3_hIq5msXQdYZdxO2Iyf7", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1Gzyz0LUMQ5s3_hIq5msXQdYZdxO2Iyf7=s400" },
+{ id: "181AptH1V8ZbGcfEObuubbCCLwASyew8f", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/181AptH1V8ZbGcfEObuubbCCLwASyew8f=s400" },
+{ id: "19Md3QdNezs8vPYMTGBHBpJT3vDWphWVY", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/19Md3QdNezs8vPYMTGBHBpJT3vDWphWVY=s400" },
+{ id: "1KgoxDDKrjeMu1NwXLXoYlNJdcyjwbkFz", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1KgoxDDKrjeMu1NwXLXoYlNJdcyjwbkFz=s400" },
+{ id: "1qciocObOAFGhV_jodfwenzNmWBS3NPXz", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1qciocObOAFGhV_jodfwenzNmWBS3NPXz=s400" },
+{ id: "18LX5kUbrMFyrJ9MuXEvRKVrAeko7lBni", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/18LX5kUbrMFyrJ9MuXEvRKVrAeko7lBni=s400" },
+{ id: "1ptA1QsHOnLWnUHaSURLIb1doKz6n5kEk", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1ptA1QsHOnLWnUHaSURLIb1doKz6n5kEk=s400" },
+{ id: "1SoEbcnKRp9bcnBPIvSX0r6N9br1fHV-i", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1SoEbcnKRp9bcnBPIvSX0r6N9br1fHV-i=s400" },
+{ id: "129jCfoZ5RXaach4UILF9psh0m8hBDUdo", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/129jCfoZ5RXaach4UILF9psh0m8hBDUdo=s400" },
+{ id: "1-xMQ6kvyTBuYfGc9dk-q4WX34GJviT1T", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1-xMQ6kvyTBuYfGc9dk-q4WX34GJviT1T=s400" },
+{ id: "1Rt6j4ORAXwQRgIpqwnAryoyt8oOqOkrp", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1Rt6j4ORAXwQRgIpqwnAryoyt8oOqOkrp=s400" },
+{ id: "13EYkRkgJoYzNHWeg78WSr1ifdmBbk1fX", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/13EYkRkgJoYzNHWeg78WSr1ifdmBbk1fX=s400" },
+{ id: "1YEvU2Qj6xtKe6TOvHSZstEHdzwGkeZkT", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1YEvU2Qj6xtKe6TOvHSZstEHdzwGkeZkT=s400" },
+{ id: "1PVOuxLMJhyJ165iJL4mANjBgYN0E8kB4", title: "Video Books", type: "video", img: "https://lh3.googleusercontent.com/d/1PVOuxLMJhyJ165iJL4mANjBgYN0E8kB4=s400" },
+
+
+
+];
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Thripudi Library – Login</title>
+
+<!-- CONFIG -->
+<script src="assets/js/config.js"></script>
+
+<!-- CSS -->
+<link rel="stylesheet" href="assets/css/auth.css">
+</head>
+
+<body>
+
+<div class="auth-overlay">
+  <div class="auth-card">
+
+    <!-- BRAND -->
+    <div class="brand">
+      <img src="assets/cover/logo.png" class="logo" alt="Thripudi Library Logo">
+      <h1>Thripudi Library</h1>
+      <p>Knowledge for Everyone</p>
+    </div>
+
+    <!-- FORM AREA -->
+    <div class="form-area">
+
+      <div class="toggle">
+        <button id="loginTab" class="active">Login</button>
+        <button id="registerTab">Register</button>
+      </div>
+
+      <!-- LOGIN -->
+      <div id="loginBox">
+        <input id="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+        <button id="loginBtn">Login</button>
+        <p class="link">Forgot password?</p>
+        <p id="msg" class="msg"></p>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerBox">
+        <input id="rname" placeholder="Name">
+        <input id="remail" placeholder="Email">
+        <input id="rpassword" type="password" placeholder="Password">
+        <button id="registerBtn">Create Account</button>
+        <p id="rmsg" class="msg"></p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/auth.js"></script>
+</body>
+</html>

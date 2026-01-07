@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<title>Aristotle Books – Thripudi Library</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page-content">
+
+<!-- PAGE TITLE + SEARCH -->
+<section class="page-hero">
+  <h2 id="pageTitle">Aristotle Books</h2>
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search books..."
+      onkeyup="searchBooks()"
+    >
+  </div>
+</section>
+
+<section class="library-container">
+  <div class="book-grid" id="bookGrid"></div>
+</section>
+
+</main>
+
+<div id="footer"></div>
+
+<!-- 🔐 LOGIN MODAL -->
+<div class="login-modal" id="loginModal">
+  <div class="login-box">
+    <img src="assets/cover/logo.png" class="login-logo">
+    <h3>Thripudi Library</h3>
+    <p id="loginMessage">ലോഗിൻ ചെയ്യണം</p>
+
+    <div class="login-actions">
+      <button class="btn-login" onclick="goToLogin()">ലോഗിൻ ചെയ്യുക</button>
+      <button class="btn-cancel" onclick="closeLoginModal()">ഇപ്പോൾ വേണ്ട</button>
+    </div>
+  </div>
+</div>
+
+<!-- 📚 PAGE BOOK DATA -->
+<script>
+window.pageBooks = [
+ { id: "12PFmWV-vEik4nzvGVGsrOaP9Nn62YhPH", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/12PFmWV-vEik4nzvGVGsrOaP9Nn62YhPH=s400" },
+{ id: "1TWPA0bAlsjIS5e547gfGyTqAuPfkTyzG", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1TWPA0bAlsjIS5e547gfGyTqAuPfkTyzG=s400" },
+{ id: "1RI-_6c5hhlLX3cN_t4ciVHA0ofFdG5o-", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1RI-_6c5hhlLX3cN_t4ciVHA0ofFdG5o-=s400" },
+{ id: "1zXrDr8xgNVc-eVFAdFXHbZ43VrB0kGcC", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1zXrDr8xgNVc-eVFAdFXHbZ43VrB0kGcC=s400" },
+{ id: "1230mRTUprJD3M_FZ-fzB38MQCWC0g_GW", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1230mRTUprJD3M_FZ-fzB38MQCWC0g_GW=s400" },
+{ id: "17e4lMQ5Py7g5leOLPSmobKgVrwORB3XN", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/17e4lMQ5Py7g5leOLPSmobKgVrwORB3XN=s400" },
+{ id: "1AbDgFRzn_7Qx_9fkyld6aQyejRzKz0nX", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1AbDgFRzn_7Qx_9fkyld6aQyejRzKz0nX=s400" },
+{ id: "1kdEJJTjzPX_PqzRFwdZIOg9lKANUtSEq", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1kdEJJTjzPX_PqzRFwdZIOg9lKANUtSEq=s400" },
+{ id: "10q4iOK3U-mrDHNVOOmsOlmdu5O1uzcvw", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/10q4iOK3U-mrDHNVOOmsOlmdu5O1uzcvw=s400" },
+{ id: "1w7ffbmD6-rdWdCe0s02ByhQ3UzJbcUMk", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1w7ffbmD6-rdWdCe0s02ByhQ3UzJbcUMk=s400" },
+{ id: "1MlZjT0y5Kx1sBRU9ufeVupFmDKFZVFaq", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1MlZjT0y5Kx1sBRU9ufeVupFmDKFZVFaq=s400" },
+{ id: "1CZhEn8VHpyCgHQBcWrrbtatijjYC-iW4", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1CZhEn8VHpyCgHQBcWrrbtatijjYC-iW4=s400" },
+{ id: "1xt4rGUMvK96E33k3zdMXYfTfCXf-RQXz", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1xt4rGUMvK96E33k3zdMXYfTfCXf-RQXz=s400" },
+{ id: "1-9Y5ZNQyEiATUQzwaQEb2Q0JQg6nSF5o", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1-9Y5ZNQyEiATUQzwaQEb2Q0JQg6nSF5o=s400" },
+{ id: "1KVSxEYjFUrFKhBsk7H5RTAiThZifPZ78", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1KVSxEYjFUrFKhBsk7H5RTAiThZifPZ78=s400" },
+{ id: "1eez8FYSAm3FWjaim7tYstmrYPEBmfshS", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1eez8FYSAm3FWjaim7tYstmrYPEBmfshS=s400" },
+{ id: "10uJfWHf28RVuKhHFdgsMM2LBjw1IGbw2", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/10uJfWHf28RVuKhHFdgsMM2LBjw1IGbw2=s400" },
+{ id: "1mD9sT6nVQ1Yn8nQ9FDXdH25q_j7HnZs5", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1mD9sT6nVQ1Yn8nQ9FDXdH25q_j7HnZs5=s400" },
+{ id: "1Esxk7PawOM5gEQJIp9GTpSOlHl6fHZ6h", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1Esxk7PawOM5gEQJIp9GTpSOlHl6fHZ6h=s400" },
+{ id: "1TubEVIIxak05bfXuyoE2LJG9Wvkyj9SE", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1TubEVIIxak05bfXuyoE2LJG9Wvkyj9SE=s400" },
+{ id: "1egxtTjutHZHcTt6fqXTFLGarqKBE7nUQ", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1egxtTjutHZHcTt6fqXTFLGarqKBE7nUQ=s400" },
+{ id: "1uaTr0H7BxD5Gcelbo4S030DVWL1WDH0o", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1uaTr0H7BxD5Gcelbo4S030DVWL1WDH0o=s400" },
+{ id: "1SSrcgg2Zx6ae6E1rfyI_y1ldTLRMdMKg", title: "Aristotle", type: "pdf", img: "https://lh3.googleusercontent.com/d/1SSrcgg2Zx6ae6E1rfyI_y1ldTLRMdMKg=s400" },
+
+
+
+
+];
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

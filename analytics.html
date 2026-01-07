@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Analytics</title>
+</head>
+<body>
+
+<h2>Analytics</h2>
+
+<div>Total Views: <span id="totalViews">0</span></div>
+
+<script>
+  fetch("https://script.google.com/macros/s/AKfycbzZWilk9uhQHFMreBgj5uyOSljytcKWEWyxlD9jrv87GC7ZDg8AySYJJ7cGsWSXfLaF/exec?action=getAnalytics")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("totalViews").innerText = data.totalViews;
+    });
+</script>
+
+</body>
+</html>

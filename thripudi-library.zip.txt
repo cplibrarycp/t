@@ -1,0 +1,27 @@
+thripudi-library.zip
+│
+├── index.html
+├── category.html
+├── list.html
+├── view.html
+│
+├── login.html
+├── register.html
+├── profile.html
+├── messages.html
+│
+├── admin.html        ⭐
+│
+├── assets/
+│   ├── css/style.css
+│   ├── js/
+│   │   ├── config.js
+│   │   ├── auth.js
+│   │   ├── data.js
+│   │   ├── history.js
+│   │   ├── admin.js
+│   │   ├── lang.js
+│   │   └── ui.js
+│   └── images/logo.png
+│
+└── README.md
