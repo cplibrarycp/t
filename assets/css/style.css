@@ -1,1 +1,277 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
+body{
+  font-family:Segoe UI,Arial;
+  background:#F8F6F0;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#006A4E;
+  color:#fff;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.site-logo{width:38px}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+/* ================= NAV ================= */
+.nav-buttons{
+  display:flex;
+  gap:12px;
+}
+
+.nav-btn{
+  position:relative;
+  overflow:hidden;
+  padding:6px 16px;
+  background:#ADD8E6;
+  color:#003300;
+  border-radius:6px;
+  font-size:13px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.nav-btn span{position:relative;z-index:2}
+
+.nav-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:#fff;
+  transition:left .35s ease;
+  z-index:1;
+}
+
+.nav-btn:hover::before{left:0}
+.nav-btn:hover{color:#009900}
+
+/* ================= USER MENU ================= */
+.user-menu{position:relative}
+
+.user-trigger{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  background:rgba(255,255,255,.2);
+  padding:4px 8px;
+  border-radius:20px;
+}
+
+.user-avatar{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.user-name{font-size:12.5px}
+.caret{font-size:10px}
+
+.user-dropdown{
+  position:absolute;
+  right:0;
+  top:110%;
+  background:#fff;
+  border-radius:8px;
+  box-shadow:0 6px 14px rgba(0,0,0,.2);
+  min-width:150px;
+  display:none;
+  flex-direction:column;
+  z-index:999;
+}
+
+.user-dropdown.show{display:flex}
+
+.user-dropdown a{
+  padding:10px 14px;
+  text-decoration:none;
+  color:#333;
+  font-size:13px;
+}
+
+.user-dropdown a:hover{background:#f2f2f2}
+
+/* ================= MAIN ================= */
+.page-content{flex:1}
+
+/* ================= GRID ================= */
+.library-container{
+  width:95%;
+  max-width:1200px;
+  margin:auto;
+  padding-bottom:90px;
+}
+
+.book-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:24px;
+}
+
+/* ================= BOOK ================= */
+.book-card{
+  background:#968989;
+  border-radius:14px;
+  padding:8px;
+  box-shadow:0 8px 10px rgba(0,0,0,.15);
+}
+
+.thumb-wrap{
+  position:relative;
+  border-radius:18px;
+  overflow:hidden;
+  border:0.5px solid rgba(0,0,0,.25);
+}
+
+.thumb-wrap img{
+  width:100%;
+  height:230px;
+  object-fit:cover;
+}
+
+.thumb-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:.3s;
+}
+
+.thumb-wrap:hover .thumb-overlay{opacity:1}
+
+.thumb-overlay button{
+  background:#F57407;
+  border:none;
+  padding:10px 15px;
+  border-radius:20px;
+  font-weight:400;
+  cursor:pointer;
+}
+
+/* ================= BOOK TITLE ================= */
+.book-title{
+  margin-top:10px;
+  text-align:center;          /* ✅ CENTER ALIGNED */
+  font-size:14px;
+  font-weight:600;
+  color:#003300;
+}
+
+/* ================= FOOTER ================= */
+.site-footer{
+  background:#003300;
+  color:#fff;
+  text-align:center;
+  padding:12px;
+}
+
+/* ================= LOGIN MODAL ================= */
+.login-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:2000;
+}
+
+.login-modal.show{display:flex}
+
+.login-box{
+  background:#fff;
+  width:90%;
+  max-width:360px;
+  border-radius:16px;
+  padding:24px 20px;
+  text-align:center;
+}
+
+.login-logo{width:60px;margin-bottom:10px}
+
+.login-actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:16px;
+}
+
+.btn-login{
+  background:#003300;
+  color:#fff;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+.btn-cancel{
+  background:#ddd;
+  border:none;
+  padding:10px 18px;
+  border-radius:8px;
+}
+
+/* ================= PAGE HERO ================= */
+.page-hero{
+  text-align:center;
+  padding:50px 20px 30px;
+}
+
+.page-hero h2{
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:20px;
+  color:#003300;
+}
+
+/* ================= SEARCH ================= */
+.search-box{
+  max-width:520px;
+  margin:0 auto;
+}
+
+.search-box input{
+  width:100%;
+  padding:14px 18px;
+  font-size:16px;
+  border-radius:30px;
+  border:2px solid #00ff00;
+  outline:none;
+}
+
+.search-box input:focus{
+  border-color:#003300;
+}
